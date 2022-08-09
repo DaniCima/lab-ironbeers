@@ -27,14 +27,20 @@ app.get('/beers', (req, res) => {
   punkAPI
     .getBeers()
     .then(beersFromApi => {
-      console.log(beersFromApi);
       res.render('beers', { beersFromApi });
     })
     .catch(error => console.log(error));
 });
 
 app.get('/random-beer', (req, res) => {
-  res.render('random-beer');
+  punkAPI
+    .getRandom()
+    .then(responseFromAPI => {
+      console.log(responseFromAPI);
+      res.render('random-beer', { responseFromAPI });
+      // your magic happens here
+    })
+    .catch(error => console.log(error));
 });
 
 app.listen(port, () => console.log(`🏃‍ on port ${port} `));
